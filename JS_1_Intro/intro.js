@@ -4,16 +4,9 @@
 
 const str = '37';
 const numb = 37;
-if ((str == numb) && (str === numb)) {
-   console.log(true); 
-} else {
-   console.log(false);
-}
-if ((str == numb) || (str === numb)) {
-   console.log(true);
-} else {
-   console.log(false);
-}
+console.log(str == numb); // true
+console.log(str === numb); // false
+
 // 2.Реализовать решение задачи в JS: 
 // - У нас есть 100(создать константу)
 // - Цена помидоров на рынке - 10(создать константу)
