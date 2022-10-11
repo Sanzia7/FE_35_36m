@@ -28,6 +28,22 @@ if ((str == numb) || (str === numb)) {
 // - на что мы потратили больше денег на орехи или остальное ? (вывести boolean значение в консоль)
 
 
-// - в зависимости от того потратили ли мы на орехи больше времени чем на всё остальное
+// - в зависимости от того потратили ли мы на орехи больше денег. чем на всё остальное
 // выводите в консоль сообщение об этом 'Больше потратили на орехи' или 'Больше потратили на фрукты и овощи'
 
+const cash = 100;
+const tomatoCost = 10;
+const cucumberCost = 5;
+const appleCost = 15;
+const nutsCost = cash - (tomatoCost + cucumberCost + appleCost);
+console.log(nutsCost);
+const ourBuy = 2 * (tomatoCost + cucumberCost + appleCost);
+const weBoughtNuts = cash - ourBuy;
+console.log(weBoughtNuts);
+console.log(ourBuy > weBoughtNuts);
+
+if (weBoughtNuts > ourBuy) {
+   console.log('Больше потратили на орехи');
+} else {
+   console.log('Больше потратили на фрукты и овощи');
+}
