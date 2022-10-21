@@ -36,7 +36,8 @@ while (i < 3) {
 // );
 
 
-//let answer = true;
+// let answer = true;
+
 // let ask = (question, yes, no) => {
 //    if (answer) {
 //       return console.log("Вы согласились.");
@@ -46,7 +47,7 @@ while (i < 3) {
 // }
 // console.log(ask("Вы согласны?", yes));
 
-let answer = false;
+let answer = true;
 function yes() {
    console.log("Вы согласились.");
 }
@@ -54,16 +55,17 @@ function no() {
    console.log("Вы отказались.");
 }
 
-// let ask = (question, calbackYes, calbackNo) =>{
+// let ask = (question, callbackYes, callbackNo) =>{
 //    if (question) {
-//       calbackYes()
+//       callbackYes()
 //    } else {
-//       calbackNo()
+//       callbackNo()
 //    }
 // }
-let ask = (question, calbackYes, calbackNo) => question ? calbackYes() : calbackNo();
-
+//     ask(answer, yes, no);
+let ask = (question, callbackYes, callbackNo) => (question ? callbackYes() : callbackNo());
 
 ask(answer, yes, no);
+
 
 
