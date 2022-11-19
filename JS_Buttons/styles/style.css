@@ -1,0 +1,36 @@
+* {
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+}
+
+body {
+   height: 100vh;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+
+}
+
+main {
+   width: 30%;
+   height: 50%;
+}
+
+button {
+   width: 100%;
+   padding: 25px 0;
+   font-size: 24px;
+   border: none;
+   outline: none;
+   background-color: rgb(105, 199, 146);
+   border-radius: 8px;
+   margin-bottom: 20px;
+   border-bottom: 4px solid rgb(139, 65, 12);
+}
+
+button:hover {
+   background-color: rgb(90, 227, 77);
+   color: coral;
+   box-shadow: 4px 5px 5px 0;
+}
