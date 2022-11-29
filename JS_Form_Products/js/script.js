@@ -1,5 +1,4 @@
 const add_form = document.querySelector('.add_form');
-
 const products = document.querySelector('.products');
 const result_p = document.querySelector('.result');
 
@@ -91,3 +90,8 @@ function rerender() {
    }
 };
 rerender();
+
+// result_p = data.reduce((prev, { price, quantity }) => prev + price * quantity, 0);
+
+// console.log(result_p);
+// к сожалению не знаю как выводить в конце страницы общую сумму всех товаров
