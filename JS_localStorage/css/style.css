@@ -1,0 +1,35 @@
+* {
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+}
+
+h2 {
+   margin: 30px 30%;
+   color: rgb(18, 57, 185);
+}
+
+.add_texts {
+   max-width: 800px;
+   margin: 40px auto;
+   padding: 20px;
+   background-color: aqua;
+   display: flex;
+   justify-content: space-around;
+}
+
+.add_texts input {
+   width: 65%;
+   padding: 10px;
+   border-radius: 7px;
+   border: 2px solid rgb(25, 160, 209);
+}
+
+.add_texts button {
+   width: 30%;
+   padding: 10px;
+   border-radius: 7px;
+   border: 3px solid rgb(25, 160, 209);
+   cursor: pointer;
+   background-color: rgb(246, 216, 177);
+}
