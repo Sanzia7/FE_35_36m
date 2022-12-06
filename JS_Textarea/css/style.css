@@ -4,21 +4,34 @@
    box-sizing: border-box;
 }
 
-h2 {
+h2,
+h3 {
    margin: 30px 30%;
-   color: rgb(88, 47, 127);
+   color: rgb(103, 59, 143);
+}
+
+.external_text {
+   color: rgb(35, 144, 144);
+   width: 80%;
+   margin: 20px auto;
+}
+
+.save {
+   color: aqua;
+   font-size: 20px;
+   margin-left: 18px;
 }
 
 .add_text {
-   max-width: 800px;
+   max-width: 90%;
    margin: 50px auto;
    padding: 40px;
    background-color: rgb(186, 112, 143);
    display: flex;
-   justify-content: space-between;
+   justify-content: space-around;
 }
 
-#text {
+#inter_text {
    width: 65%;
    padding: 10px;
    border-radius: 7px;
@@ -28,6 +41,7 @@ h2 {
 
 .add_text input {
    margin-top: 30px;
+   margin-left: 20px;
    width: 20%;
    height: 10%;
    padding: 10px;
