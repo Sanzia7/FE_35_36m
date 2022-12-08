@@ -1,6 +1,7 @@
-const add_form = document.querySelector('.add_form');
-const products = document.querySelector('.products');
-const result_p = document.querySelector('.result');
+// First level: необходимо реализовать страницу, которая получает данные о товаре и выводит информационные карточки с товарами.
+
+// В нижней части страницы должен быть расчет общей суммы. 
+//Результат должен выглядеть приблизительно как на макете https://www.figma.com/file/wRonUTYoOVL3ii4meCtdzR/Untitled?node-id=1%3A2&t=5i8ANTCkEpFzMpoi-0
 
 let data = [
    {
@@ -26,29 +27,35 @@ let data = [
    },
 ];
 
-add_form.addEventListener('submit', (event) => {
+
+const form = document.querySelector('.add_form');
+const products = document.querySelector('.products');
+
+form.addEventListener('submit', (event) => {
    event.preventDefault();
 
    const id = Date.now();
-   const title = add_form.title.value;
-   const price = add_form.price.value;
-   const quantity = add_form.quantity.value;
-   const amount = add_form.amount.value;
-   
-   data.push({ id, title, price, quantity, amount });
 
-   add_form.title.value = '';
-   add_form.price.value = '';
-   add_form.quantity.value = '';
-   add_form.amount.value = '';
+   const title = event.target.title.value;
+   const price = +event.target.price.value;
+   const quantity = +event.target.quantity.value;
+   
+   data.push({ id, title, price, quantity });
 
    rerender();
+
+   event.target.title.value = '';
+   event.target.price.value = '';
+   event.target.quantity.value = '';
+
 });
+
 
 function deleteProduct(id) {
    data = data.filter(product => product.id !== id);
    rerender();
 };
+
 
 function createProductCard(id, title, price, quantity, amount) {
    const container = document.createElement('div');
@@ -58,17 +65,19 @@ function createProductCard(id, title, price, quantity, amount) {
    const amount_p = document.createElement('p');
    const delete_btn = document.createElement('button');
 
+   container.classList.add('product');
+
    title_p.innerText = title;
    price_p.innerText = price;
    quantity_p.innerText = quantity;
    amount_p.innerText = amount;
+   amount = `Total amount = ${price} * ${quantity}`;
+
    delete_btn.innerText = 'Delete';
 
    delete_btn.addEventListener('click', () => {
       deleteProduct(id);
    })
-
-   container.classList.add('product');
 
    container.append(title_p, price_p, quantity_p, amount_p, delete_btn);
 
@@ -83,15 +92,22 @@ function rerender() {
       info.innerText = 'There are no products';
       products.append(info);
    } else {
-      data.forEach(({ id, title, price, quantity, amount }) => {
-         const container = createProductCard(id, title, price, quantity, amount);
-         products.append(container);
+      data.forEach(({ id, title, price, quantity, amount}) => {
+         const newProduct = createProductCard(id, title, price, quantity, amount);
+         products.append(newProduct);
       })
    }
+
+   const total_amount = data.reduce((prev, { quantity }) => prev + quantity, 0);
+
+   const total_price = data.reduce((prev, { price, quantity }) => prev + price * quantity, 0);
+
+
+   const total_amount_elem = document.querySelector('.order_info .total_amount');
+   const total_prace_elem = document.querySelector('.order_info .total_price');
+
+   total_amount_elem.innerText = total_amount;
+   total_prace_elem.innerText = total_price;
+
 };
 rerender();
-
-// result_p = data.reduce((prev, { price, quantity }) => prev + price * quantity, 0);
-
-// console.log(result_p);
-// к сожалению не знаю как выводить в конце страницы общую сумму всех товаров
