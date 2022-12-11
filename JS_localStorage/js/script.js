@@ -14,7 +14,7 @@ const texts_container = document.querySelector('.text_areas');
 form.addEventListener('submit', (event) => {
    event.preventDefault();
    const text = event.target.text.value;
-   console.log(text);
+   //console.log(text);
    texts.push({text})
    write_text(texts);
    event.target.text.value = '';
