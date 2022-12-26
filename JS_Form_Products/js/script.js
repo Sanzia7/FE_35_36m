@@ -3,111 +3,113 @@
 // В нижней части страницы должен быть расчет общей суммы. 
 //Результат должен выглядеть приблизительно как на макете https://www.figma.com/file/wRonUTYoOVL3ii4meCtdzR/Untitled?node-id=1%3A2&t=5i8ANTCkEpFzMpoi-0
 
-let data = [
-   {
-      id: 1,
-      title: 'Bicycle',
-      price: 4500,
-      quantity: 5,
-      amount: 5 * 4500,
-   },
-   {
-      id: 2,
-      title: 'Roller',
-      price: 2500,
-      quantity: 7,
-      amount: 7 * 2500,
-   },
-   {
-      id: 3,
-      title: 'Scooter',
-      price: 1500,
-      quantity: 10,
-      amount: 10 * 1500,
-   },
-];
+// let products = [
+//    {
+//       id: 1,
+//       title: 'Bicycle',
+//       price: 4500,
+//       quantity: 5,
+//       amount: 5 * 4500,
+//    },
+//    {
+//       id: 2,
+//       title: 'Roller',
+//       price: 2500,
+//       quantity: 7,
+//       amount: 7 * 2500,
+//    },
+//    {
+//       id: 3,
+//       title: 'Scooter',
+//       price: 1500,
+//       quantity: 10,
+//       amount: 10 * 1500,
+//    },
+// ];
 
+function addToLocal(products) {
+   localStorage.setItem('products', JSON.stringify(products))
+};
+
+function getFromLocal() {
+   return JSON.parse(localStorage.getItem('products')) ?? [];
+}
+
+let products = getFromLocal()
 
 const form = document.querySelector('.add_form');
-const products = document.querySelector('.products');
+const productsContainer = document.querySelector('.products');
 
 form.addEventListener('submit', (event) => {
    event.preventDefault();
 
    const id = Date.now();
-
    const title = event.target.title.value;
    const price = +event.target.price.value;
    const quantity = +event.target.quantity.value;
+   const amount = +event.target.amount.value;
    
-   data.push({ id, title, price, quantity });
-
-   rerender();
+   addToLocal([...getFromLocal(), { id, title, price, quantity, amount }])
 
    event.target.title.value = '';
    event.target.price.value = '';
    event.target.quantity.value = '';
+   event.target.amount.value = '';
 
+   rerender();
 });
 
-
-function deleteProduct(id) {
-   data = data.filter(product => product.id !== id);
-   rerender();
-};
-
-
-function createProductCard(id, title, price, quantity, amount) {
-   const container = document.createElement('div');
+function createProductCard(id, title, price, quantity) {
+   const containerCard = document.createElement('div');
    const title_p = document.createElement('p');
    const price_p = document.createElement('p');
    const quantity_p = document.createElement('p');
    const amount_p = document.createElement('p');
    const delete_btn = document.createElement('button');
 
-   container.classList.add('product');
+   containerCard.classList.add('product');
 
    title_p.innerText = title;
    price_p.innerText = price;
    quantity_p.innerText = quantity;
-   amount_p.innerText = amount;
-   amount = `Total amount = ${price} * ${quantity}`;
-
+   amount_p.innerText = `Total amount = ${price} * ${quantity}`;
    delete_btn.innerText = 'Delete';
 
    delete_btn.addEventListener('click', () => {
       deleteProduct(id);
    })
 
-   container.append(title_p, price_p, quantity_p, amount_p, delete_btn);
-
-   return container
+   containerCard.append(title_p, price_p, quantity_p, amount_p, delete_btn);
+   return containerCard
 }
 
-function rerender() {
-   products.innerText = '';
+function deleteProduct(id) {
+   const new_products = getFromLocal().filtery(product => product.id !== id)
+   addToLocal(new_products)
+   rerender();
+};
 
-   if (data.length === 0) {
+function rerender() {
+   productsContainer.innerText = '';
+
+   if (getFromLocal().length === 0) {
       const info = document.createElement('p');
       info.innerText = 'There are no products';
-      products.append(info);
+      productsContainer.append(info);
    } else {
-      data.forEach(({ id, title, price, quantity, amount}) => {
+      getFromLocal().forEach(({ id, title, price, quantity, amount}) => {
          const newProduct = createProductCard(id, title, price, quantity, amount);
-         products.append(newProduct);
+         productsContainer.append(newProduct);
       })
    }
 
-   const total_amount = data.reduce((prev, { quantity }) => prev + quantity, 0);
-
-   const total_price = data.reduce((prev, { price, quantity }) => prev + price * quantity, 0);
-
+   const total_amount = products.reduce((prev, { quantity }) => prev + quantity, 0);
+   const total_price = products.reduce((prev, { price, quantity }) => prev + price * quantity, 0);
 
    const total_amount_elem = document.querySelector('.order_info .total_amount');
    const total_prace_elem = document.querySelector('.order_info .total_price');
 
    total_amount_elem.innerText = total_amount;
    total_prace_elem.innerText = total_price;
-
 };
 rerender();

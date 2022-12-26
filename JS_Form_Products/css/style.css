@@ -3,7 +3,9 @@
    padding: 0;
    box-sizing: border-box;
 }
-
+body{
+   background-color: rgb(248, 245, 195);
+}
 .add_form {
    margin: 40px auto;
    padding: 30px;
@@ -11,16 +13,16 @@
    height: 30%;
    display: flex;
    flex-direction: column;
-   border: 2px solid rgb(143, 116, 52);
+   border: 3px solid rgb(131, 81, 24);
    border-radius: 7px;
-   background-color: rgb(253, 220, 175);
-   box-shadow: 4px 4px 5px rgb(114, 94, 67)
+   background-color: rgb(207, 170, 130);
+   box-shadow: 4px 4px 5px rgb(70, 36, 36)
 }
 
 .add_form input {
    margin: 20px 0;
-   padding: 10px;
-   border: 3px solid rgb(144, 176, 78);
+   padding: 15px;
+   border: 3px solid rgb(154, 107, 66);
    border-radius: 7px;
 }
 
@@ -47,28 +49,28 @@
    padding: 15px 30px;
    margin: 30px auto;
    width: 90%;
-   border: 3px solid rgb(54, 154, 112);
+   border: 3px solid rgb(141, 158, 207);
    border-radius: 7px;
-   box-shadow: 5px 4px 4px rgb(167, 180, 150);
+   box-shadow: 5px 4px 4px rgb(84, 89, 78);
    display: flex;
    flex-wrap: wrap;
    justify-content: space-between;
-   background-color: rgb(208, 239, 142);
+   background-color: rgb(164, 215, 248);
 }
 
 .product {
    padding: 15px 30px;
    margin: 15px;
    width: 25%;
-   border: 2px solid rgb(108, 146, 217);
+   border: 1px solid rgb(92, 121, 98);
    border-radius: 7px;
    display: flex;
    flex-direction: column;
    justify-content: space-around;
-   background-color: rgb(87, 210, 244);
-   box-shadow: 4px 4px 4px rgb(100, 124, 148);
+   background-color: rgb(140, 249, 156);
+   box-shadow: 4px 4px 4px rgb(72, 53, 27);
    font-size: 25px;
-   color: darkblue;
+   color: rgb(10, 73, 141);
 }
 
 button {
@@ -78,13 +80,13 @@ button {
    border: none;
    outline: none;
    align-self: flex-end;
-   background-color: rgb(233, 85, 27);
+   background-color: rgb(244, 132, 88);
    border-radius: 8px;
-   border-bottom: 4px solid rgb(56, 95, 195);
+   border-bottom: 4px solid rgb(221, 62, 62);
 }
 
 button:hover {
-   background-color: rgb(90, 227, 77);
+   background-color: rgb(236, 224, 65);
    color: coral;
    box-shadow: 3px 3px 3px 0 rgb(244, 211, 127);
    cursor: pointer;
@@ -112,5 +114,5 @@ button:hover {
 
 .total_price {
    margin-left: 50px;
-   color: rgb(7, 116, 76);
+   color: rgb(226, 5, 5);
 }
