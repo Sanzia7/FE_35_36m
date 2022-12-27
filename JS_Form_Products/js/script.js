@@ -49,7 +49,9 @@ form.addEventListener('submit', (event) => {
    const quantity = +event.target.quantity.value;
    const amount = +event.target.amount.value;
    
-   addToLocal([...getFromLocal(), { id, title, price, quantity, amount }])
+   products = [...getFromLocal(), { id, title, price, quantity, amount }]
+   addToLocal(products)
+   // addToLocal([...getFromLocal(), { id, title, price, quantity, amount }])
 
    event.target.title.value = '';
    event.target.price.value = '';
@@ -59,12 +61,18 @@ form.addEventListener('submit', (event) => {
    rerender();
 });
 
-function createProductCard(id, title, price, quantity) {
+function deleteProduct(id) {
+   const new_products = getFromLocal().filter(product => product.id !== id)
+   addToLocal(new_products)
+   rerender();
+};
+
+function createProductCard(id, title, price, quantity, total) {
    const containerCard = document.createElement('div');
    const title_p = document.createElement('p');
    const price_p = document.createElement('p');
    const quantity_p = document.createElement('p');
-   const amount_p = document.createElement('p');
+   const total_p = document.createElement('p');
    const delete_btn = document.createElement('button');
 
    containerCard.classList.add('product');
@@ -72,22 +80,17 @@ function createProductCard(id, title, price, quantity) {
    title_p.innerText = title;
    price_p.innerText = price;
    quantity_p.innerText = quantity;
-   amount_p.innerText = `Total amount = ${price} * ${quantity}`;
+   total_p.innerText = `Total price: ${price} * ${quantity} = ${price * quantity}`;
    delete_btn.innerText = 'Delete';
 
    delete_btn.addEventListener('click', () => {
       deleteProduct(id);
    })
 
-   containerCard.append(title_p, price_p, quantity_p, amount_p, delete_btn);
+   containerCard.append(title_p, price_p, quantity_p, total_p, delete_btn);
    return containerCard
 }
 
-function deleteProduct(id) {
-   const new_products = getFromLocal().filtery(product => product.id !== id)
-   addToLocal(new_products)
-   rerender();
-};
 
 function rerender() {
    productsContainer.innerText = '';
@@ -97,8 +100,8 @@ function rerender() {
       info.innerText = 'There are no products';
       productsContainer.append(info);
    } else {
-      getFromLocal().forEach(({ id, title, price, quantity, amount}) => {
-         const newProduct = createProductCard(id, title, price, quantity, amount);
+      getFromLocal().forEach(({ id, title, price, quantity, total}) => {
+         const newProduct = createProductCard(id, title, price, quantity, total);
          productsContainer.append(newProduct);
       })
    }
@@ -107,9 +110,9 @@ function rerender() {
    const total_price = products.reduce((prev, { price, quantity }) => prev + price * quantity, 0);
 
    const total_amount_elem = document.querySelector('.order_info .total_amount');
-   const total_prace_elem = document.querySelector('.order_info .total_price');
+   const total_price_elem = document.querySelector('.order_info .total_price');
 
    total_amount_elem.innerText = total_amount;
-   total_prace_elem.innerText = total_price;
+   total_price_elem.innerText = total_price;
 };
 rerender();
